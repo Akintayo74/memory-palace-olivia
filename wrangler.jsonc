@@ -1,0 +1,25 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "memory-palace",
+	"main": "src/worker.js",
+	"compatibility_date": "2026-11-15",
+	// The app itself: plain static files, served before the Worker runs.
+	"assets": {
+		"directory": "./public"
+	},
+	// Sync storage. No id here: the first `wrangler deploy` creates the namespace
+	// and writes its id into this file.
+	"kv_namespaces": [
+		{
+			"binding": "STATE",
+			"id": "11f531f33c894476a5b0542702624c75"
+		}
+	],
+	// Serve on the subdomain. akintayo.dev must be a zone in the same Cloudflare account.
+	"routes": [
+		{
+			"pattern": "memory.akintayo.dev",
+			"custom_domain": true
+		}
+	]
+}
